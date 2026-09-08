@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investment Portal</title>
+<meta name="description" content="Secure member investment portal">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="toast" class="toast"></div>
+
+<section id="authView" class="auth-shell">
+  <div class="auth-brand">
+    <div class="brand-mark">IP</div>
+    <div><strong data-i18n="brand">Investment Portal</strong><span data-i18n="brandSub">Member Area</span></div>
+  </div>
+  <div class="auth-card">
+    <div class="language-switch"><button id="langAr" class="active">العربية</button><button id="langEn">English</button></div>
+    <div id="authTabs" class="auth-tabs">
+      <button id="showLogin" class="active" data-i18n="signIn">تسجيل الدخول</button>
+      <button id="showSignup" data-i18n="signUp">إنشاء حساب</button>
+    </div>
+
+    <form id="loginForm" class="form">
+      <h1 data-i18n="welcomeBack">مرحباً بعودتك</h1>
+      <p class="muted" data-i18n="loginSub">سجّل الدخول إلى حسابك بأمان.</p>
+      <label><span data-i18n="username">اسم المستخدم</span><input id="loginUsername" required autocomplete="username"></label>
+      <label><span data-i18n="password">كلمة المرور</span><input id="loginPassword" type="password" required autocomplete="current-password"></label>
+      <button class="primary wide" type="submit" data-i18n="signIn">تسجيل الدخول</button>
+      <p class="fine"><span data-i18n="forgot">نسيت كلمة المرور؟</span> <button type="button" class="link" id="forgotBtn" data-i18n="reset">إعادة التعيين</button></p>
+    </form>
+
+    <form id="signupForm" class="form hidden">
+      <h1 data-i18n="createAccount">أنشئ حسابك</h1>
+      <p class="muted" data-i18n="signupSub">أنشئ حساباً جديداً للوصول إلى بوابتك.</p>
+      <label><span data-i18n="fullName">الاسم الكامل</span><input id="signupName" required autocomplete="name"></label>
+      <label><span data-i18n="username">اسم المستخدم</span><input id="signupUsername" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_.-]+"></label>
+      <label><span data-i18n="email">البريد الإلكتروني</span><input id="signupEmail" type="email" required autocomplete="email"></label>
+      <label><span data-i18n="password">كلمة المرور</span><input id="signupPassword" type="password" required minlength="8" autocomplete="new-password"></label>
+      <label><span data-i18n="confirmPassword">تأكيد كلمة المرور</span><input id="signupConfirm" type="password" required minlength="8" autocomplete="new-password"></label>
+      <label class="check"><input id="terms" type="checkbox" required><span data-i18n="agree">أوافق على الشروط وسياسة الاستخدام.</span></label>
+      <button class="primary wide" type="submit" data-i18n="createAccount">إنشاء حساب</button>
+    </form>
+  </div>
+  <p class="copyright">© <span id="year"></span> Investment Portal</p>
+</section>
+
+<section id="resetView" class="auth-shell hidden">
+  <div class="auth-brand"><div class="brand-mark">IP</div><div><strong data-i18n="brand">Investment Portal</strong><span data-i18n="brandSub">منطقة الأعضاء</span></div></div>
+  <div class="auth-card">
+    <div class="language-switch"><button id="resetLangAr" type="button">العربية</button><button id="resetLangEn" type="button">English</button></div>
+    <form id="resetForm" class="form">
+      <h1 data-i18n="resetPassword">تعيين كلمة مرور جديدة</h1>
+      <label><span data-i18n="newPassword">كلمة المرور الجديدة</span><input id="newPassword" type="password" minlength="8" required autocomplete="new-password"></label>
+      <label><span data-i18n="confirmNewPassword">تأكيد كلمة المرور الجديدة</span><input id="confirmNewPassword" type="password" minlength="8" required autocomplete="new-password"></label>
+      <button class="primary wide" type="submit" data-i18n="updatePassword">تحديث كلمة المرور</button>
+    </form>
+  </div>
+</section>
+
+<section id="appView" class="app-shell hidden">
+  <aside class="sidebar">
+    <div class="side-brand"><div class="brand-mark">IP</div><div><strong>Investment Portal</strong><span data-i18n="memberArea">منطقة الأعضاء</span></div></div>
+    <nav id="nav">
+      <button data-page="dashboard" class="active">⌂ <span data-i18n="dashboard">لوحة التحكم</span></button>
+      <button data-page="investments">◈ <span data-i18n="investments">استثماراتي</span></button>
+      <button data-page="fund">＋ <span data-i18n="fundAccount">تمويل الحساب</span></button>
+      <button data-page="withdraw">↗ <span data-i18n="withdraw">السحب</span></button>
+      <button data-page="transactions">≡ <span data-i18n="transactions">المعاملات</span></button>
+      <button data-page="profile">◉ <span data-i18n="profile">الملف الشخصي</span></button>
+      <button data-page="settings">⚙ <span data-i18n="settings">الإعدادات</span></button>
+    </nav>
+    <button id="logout" class="logout">⇥ <span data-i18n="logout">تسجيل الخروج</span></button>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow" data-i18n="memberArea">منطقة الأعضاء</div><h2 id="pageTitle" data-i18n="dashboard">لوحة التحكم</h2></div>
+      <div class="top-actions"><button id="topLang" class="lang-btn">English</button><div class="avatar" id="avatarSmall">U</div><div><strong id="userNameTop">—</strong><span id="userEmailTop">—</span></div></div>
+    </header>
+
+    <div id="page-dashboard" class="page">
+      <div class="hero">
+        <div><span class="pill" data-i18n="securePortal">بوابة آمنة</span><h1><span data-i18n="hello">مرحباً</span> <span id="heroName">—</span></h1><p data-i18n="dashboardIntro">تابع رصيدك واستثماراتك وطلباتك من مكان واحد.</p></div>
+        <button class="secondary" data-page-jump="fund" data-i18n="fundAccount">تمويل الحساب</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><span data-i18n="availableBalance">الرصيد المتاح</span><strong id="balance">KWD 0.000</strong></div>
+        <div class="stat"><span data-i18n="totalInvested">إجمالي الاستثمار</span><strong id="invested">KWD 0.000</strong></div>
+        <div class="stat"><span data-i18n="earnings">الأرباح المسجلة</span><strong id="earnings">KWD 0.000</strong></div>
+      </div>
+      <div class="grid2">
+        <section class="panel"><div class="panel-head"><h3 data-i18n="recentTransactions">آخر المعاملات</h3><button class="link" data-page-jump="transactions" data-i18n="viewAll">عرض الكل</button></div><div id="recentTx" class="list"></div></section>
+        <section class="panel"><div class="panel-head"><h3 data-i18n="myInvestments">استثماراتي</h3><button class="link" data-page-jump="investments" data-i18n="viewAll">عرض الكل</button></div><div id="recentInv" class="list"></div></section>
+      </div>
+    </div>
+
+    <div id="page-investments" class="page hidden"><div class="section-head"><div><h2 data-i18n="investments">استثماراتي</h2><p data-i18n="investmentSub">الاستثمارات المسجلة في حسابك.</p></div></div><section class="panel"><div id="investmentList" class="list"></div></section></div>
+
+    <div id="page-fund" class="page hidden"><div class="section-head"><div><h2 data-i18n="fundAccount">تمويل الحساب</h2><p data-i18n="fundSub">أرسل طلب تمويل ليتم مراجعته من الإدارة.</p></div></div><div class="grid2"><section class="panel"><form id="fundForm" class="form"><label><span data-i18n="amount">المبلغ (KWD)</span><input id="fundAmount" type="number" min="0.001" step="0.001" required></label><label><span data-i18n="method">طريقة الدفع</span><input id="fundMethod" required></label><label><span data-i18n="reference">المرجع</span><input id="fundRef"></label><label><span data-i18n="notes">ملاحظات</span><textarea id="fundNotes" rows="4"></textarea></label><button class="primary" data-i18n="submitRequest">إرسال الطلب</button></form></section><section class="panel"><h3 data-i18n="myFundingRequests">طلبات التمويل</h3><div id="fundingList" class="list"></div></section></div></div>
+
+    <div id="page-withdraw" class="page hidden"><div class="section-head"><div><h2 data-i18n="withdraw">السحب</h2><p data-i18n="withdrawSub">أرسل طلب سحب من رصيدك المتاح.</p></div></div><div class="grid2"><section class="panel"><form id="withdrawForm" class="form"><label><span data-i18n="amount">المبلغ (KWD)</span><input id="withdrawAmount" type="number" min="0.001" step="0.001" required></label><label><span data-i18n="method">طريقة السحب</span><input id="withdrawMethod" required></label><label><span data-i18n="destination">بيانات الاستلام</span><input id="withdrawDestination" required></label><label><span data-i18n="notes">ملاحظات</span><textarea id="withdrawNotes" rows="4"></textarea></label><button class="primary" data-i18n="submitRequest">إرسال الطلب</button></form></section><section class="panel"><h3 data-i18n="myWithdrawalRequests">طلبات السحب</h3><div id="withdrawalList" class="list"></div></section></div></div>
+
+    <div id="page-transactions" class="page hidden"><div class="section-head"><div><h2 data-i18n="transactions">المعاملات</h2><p data-i18n="transactionsSub">سجل العمليات المسجلة على حسابك.</p></div></div><section class="panel"><div id="transactionList" class="list"></div></section></div>
+
+    <div id="page-profile" class="page hidden"><div class="section-head"><div><h2 data-i18n="profile">الملف الشخصي</h2><p data-i18n="profileSub">حدّث معلومات ملفك الشخصي.</p></div></div><section class="panel profile-panel"><div class="profile-avatar" id="profileAvatar">U</div><div class="avatar-upload"><label class="secondary file-btn"><span data-i18n="chooseImage">اختيار صورة</span><input id="avatarFile" type="file" accept="image/*" hidden></label></div><form id="profileForm" class="form"><label><span data-i18n="fullName">الاسم الكامل</span><input id="profileName"></label><label><span data-i18n="phone">رقم الهاتف</span><input id="profilePhone"></label><label><span data-i18n="email">البريد الإلكتروني</span><input id="profileEmail" disabled></label><label><span data-i18n="username">اسم المستخدم</span><input id="profileUsername" disabled></label><button class="primary" data-i18n="saveChanges">حفظ التغييرات</button></form></section></div>
+
+    <div id="page-settings" class="page hidden"><div class="section-head"><div><h2 data-i18n="settings">الإعدادات</h2><p data-i18n="settingsSub">تفضيلات حسابك.</p></div></div><section class="panel"><div class="setting-row"><div><strong data-i18n="language">اللغة</strong><span data-i18n="languageSub">اختر لغة واجهة الحساب.</span></div><div><button id="settingsAr" class="secondary">العربية</button> <button id="settingsEn" class="secondary">English</button></div></div></section></div>
+  </main>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
