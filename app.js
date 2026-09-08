@@ -161,25 +161,62 @@ function renderRows(id, rows, renderer) {
   el.innerHTML = rows.length ? rows.map(renderer).join('') : `<div class="empty">${esc(tr('noData'))}</div>`;
 }
 
+const USER_EMAIL_CACHE_KEY = 'investment_portal_username_email';
+
+function getCachedEmailForUsername(username) {
+  try {
+    const map = JSON.parse(localStorage.getItem(USER_EMAIL_CACHE_KEY) || '{}');
+    return map[String(username).trim().toLowerCase()] || null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function cacheUsernameEmail(username, email) {
+  try {
+    const key = String(username).trim().toLowerCase();
+    if (!key || !email) return;
+    const map = JSON.parse(localStorage.getItem(USER_EMAIL_CACHE_KEY) || '{}');
+    map[key] = String(email).trim().toLowerCase();
+    localStorage.setItem(USER_EMAIL_CACHE_KEY, JSON.stringify(map));
+  } catch (_) {}
+}
+
 async function emailForUsername(username) {
   const clean = username.trim();
   if (!clean) return null;
-  const { data, error } = await sb.rpc('get_email_for_username', {p_username: clean});
+
+  // Primary path: secure database RPC. The database function is SECURITY DEFINER
+  // and does not require exposing profile emails through a public table policy.
+  const { data, error } = await sb.rpc('get_email_for_username', { p_username: clean });
+  if (!error && data) {
+    cacheUsernameEmail(clean, data);
+    return data;
+  }
+
+  // Resilience for a temporary API/RPC failure on the same browser that created
+  // the account. This never exposes the profiles table or bypasses Auth.
+  const cached = getCachedEmailForUsername(clean);
+  if (cached) return cached;
+
   if (error) throw error;
-  return data || null;
+  return null;
 }
 
-async function loginWithUsername(identifier, password) {
-  const clean = identifier.trim();
+async function loginWithUsername(username, password) {
+  const clean = username.trim();
   if (!clean || !password) throw new Error(tr('loginFailed'));
 
-  // Supabase Auth signs in with email/password. Members may enter either
-  // their username (normal flow) or the account email (reliable fallback).
-  const email = clean.includes('@') ? clean.toLowerCase() : await emailForUsername(clean);
+  // Supabase Auth signs in with email + password. If the user enters an email,
+  // authenticate directly and avoid the username RPC entirely.
+  const email = clean.includes('@') ? clean : await emailForUsername(clean);
   if (!email) throw new Error(tr('loginFailed'));
 
   const { error } = await sb.auth.signInWithPassword({ email, password });
   if (error) throw error;
+
+  // Keep a successful username mapping locally for resilience on this device.
+  if (!clean.includes('@')) cacheUsernameEmail(clean, email);
 }
 
 async function signup() {
@@ -204,6 +241,10 @@ async function signup() {
   });
   if (error) throw error;
   if (!data.user) throw new Error(tr('error'));
+
+  // Save the username/email mapping locally so the same device can still sign in
+  // if the username lookup endpoint has a temporary network/API issue.
+  cacheUsernameEmail(username, email);
 
   document.getElementById('signupForm').reset();
   showAuth('login');
