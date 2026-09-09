@@ -98,3 +98,26 @@ textarea{min-height:120px;resize:vertical}
 @media(max-width:800px){
   #jivo-iframe-container,.jivo-iframe-container,.jivo-widget-container{bottom:88px!important}
 }
+
+/* Premium funding, transfer, bank and notification surfaces */
+.premium-action-panel{display:flex;flex-direction:column;justify-content:center;min-height:340px}
+.chat-fund-btn{margin-top:22px}
+.chat-request-note{display:flex;align-items:center;gap:10px;margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface2);font-weight:700;color:var(--muted)}
+.chat-request-note span:first-child{color:var(--green)}
+.transfer-note{margin:4px 0 4px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface2);color:var(--muted);font-size:.92rem;line-height:1.5}
+.transfer-side-panel{align-self:start}
+.institution-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.institution-chips span{padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface2);font-weight:700;font-size:.82rem}
+.notification-list{display:grid;gap:10px}
+.notification-item{display:flex;justify-content:space-between;gap:18px;padding:15px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface2)}
+.notification-item b{display:block;margin-bottom:5px}
+.notification-item p{margin:0;color:var(--muted);line-height:1.5}
+.notification-item small{color:var(--muted);white-space:nowrap}
+@media(max-width:760px){
+ .premium-action-panel{min-height:auto}
+ .notification-item{display:block}
+ .notification-item small{display:block;margin-top:8px}
+ .institution-chips{gap:6px}
+}
+
+.request-message{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--surface2);border-inline-start:3px solid var(--green);color:var(--muted);line-height:1.5}
