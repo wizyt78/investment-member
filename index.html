@@ -134,8 +134,76 @@
           <button class="action-card" data-view="funding"><span class="action-icon green">＋</span><div><b data-i18n="deposit">Deposit</b><small data-i18n="depositSub">Fund your account</small></div><i>›</i></button>
           <button class="action-card" data-view="send"><span class="action-icon blue">⇄</span><div><b data-i18n="sendMoney">Send Money</b><small data-i18n="sendSub">Transfer request</small></div><i>›</i></button>
           <button class="action-card" data-view="withdraw"><span class="action-icon purple">↗</span><div><b data-i18n="withdraw">Withdraw</b><small data-i18n="withdrawSub">Request your funds</small></div><i>›</i></button>
-          <button class="action-card" data-view="settings"><span class="action-icon gold">⚙</span><div><b data-i18n="settings">Settings</b><small data-i18n="settingsSub">Manage your account</small></div><i>›</i></button>
         </div>
+
+
+        <section class="member-highlights" aria-label="Member highlights">
+          <div class="highlights-head">
+            <div>
+              <span class="eyebrow" data-i18n="memberHighlights">MEMBER HIGHLIGHTS</span>
+              <h2 data-i18n="topMembers">Top Members</h2>
+            </div>
+            <span class="highlights-note" data-i18n="verifiedResults">Verified results</span>
+          </div>
+          <div class="profile-carousel">
+            <button class="profile-arrow profile-prev" id="profilePrev" type="button" aria-label="Previous">‹</button>
+            <div class="profile-viewport">
+              <div class="profile-track" id="profileTrack">
+                <article class="profile-slide">
+                  <img src="profiles/owner.jpg" alt="Owner profile photo">
+                  <div class="profile-name">Owner</div>
+                  <div class="profile-role" data-i18n="ownerRole">Owner</div>
+                  <strong>150,000.00 KWD</strong>
+                </article>
+                <article class="profile-slide">
+                  <img src="profiles/manager.jpg" alt="William James profile photo">
+                  <div class="profile-name">William James</div>
+                  <div class="profile-role" data-i18n="managerRole">Manager</div>
+                  <strong>1,169,000.00 USD</strong>
+                </article>
+                <article class="profile-slide">
+                  <img src="profiles/khalid-f.jpg" alt="Khalid F. profile photo">
+                  <div class="profile-name">Khalid F.</div>
+                  <div class="profile-role" data-i18n="memberRole">Member</div>
+                  <strong>88,902,000.00 KWD</strong>
+                </article>
+                <article class="profile-slide">
+                  <img src="profiles/amira-hassan.jpg" alt="Amira Hassan profile photo">
+                  <div class="profile-name">Amira Hassan</div>
+                  <div class="profile-role" data-i18n="memberRole">Member</div>
+                  <strong>60,000.00 EUR</strong>
+                </article>
+                <article class="profile-slide">
+                  <img src="profiles/omar-al-sabah.jpg" alt="Omar Al-Sabah profile photo">
+                  <div class="profile-name">Omar Al-Sabah</div>
+                  <div class="profile-role" data-i18n="memberRole">Member</div>
+                  <strong>58,000.00 EUR</strong>
+                </article>
+                <article class="profile-slide">
+                  <img src="profiles/layla-ahmed.jpg" alt="Layla Ahmed profile photo">
+                  <div class="profile-name">Layla Ahmed</div>
+                  <div class="profile-role" data-i18n="memberRole">Member</div>
+                  <strong>76,889.00 KWD</strong>
+                </article>
+                <article class="profile-slide">
+                  <img src="profiles/daniel-morgan.jpg" alt="Daniel Morgan profile photo">
+                  <div class="profile-name">Daniel Morgan</div>
+                  <div class="profile-role" data-i18n="memberRole">Member</div>
+                  <strong>40,888.00 EUR</strong>
+                </article>
+                <article class="profile-slide">
+                  <img src="profiles/mariam-khalil.jpg" alt="Mariam Khalil profile photo">
+                  <div class="profile-name">Mariam Khalil</div>
+                  <div class="profile-role" data-i18n="memberRole">Member</div>
+                  <strong>37,908.00 KWD</strong>
+                </article>
+              </div>
+            </div>
+            <button class="profile-arrow profile-next" id="profileNext" type="button" aria-label="Next">›</button>
+          </div>
+          <div class="profile-dots" id="profileDots"></div>
+          <p class="profile-photo-note" data-i18n="replaceProfilePhotos">Replace the profile files in the profiles folder with the correct photos, keeping the same filenames.</p>
+        </section>
 
         <div class="metrics">
           <article><span class="metric-icon">▣</span><div><small data-i18n="totalInvested">Total invested</small><strong id="invested">0.000 KWD</strong></div></article>
