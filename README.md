@@ -23,3 +23,19 @@ Member UI:
 - No fabricated account or transaction data
 
 Note: the current Worker has no genuine member-to-member transfer endpoint, so Send Money does not pretend to move funds.
+
+
+## Member profile photos
+
+The Home member carousel uses eight files in `profiles/`. Replace each JPG with the correct real profile photo while keeping the exact filename:
+
+- `owner.jpg`
+- `manager.jpg`
+- `khalid-f.jpg`
+- `amira-hassan.jpg`
+- `omar-al-sabah.jpg`
+- `layla-ahmed.jpg`
+- `daniel-morgan.jpg`
+- `mariam-khalil.jpg`
+
+No HTML editing is required when replacing a photo.
