@@ -154,44 +154,61 @@
             <div id="investments" class="investment-list"></div>
           </div>
         </div>
+        <div class="panel notification-panel">
+          <div class="panel-head"><div><span class="eyebrow" data-i18n="notifications">ACCOUNT MESSAGES</span><h2 data-i18n="notifications">Account messages</h2></div></div>
+          <div id="notificationList" class="notification-list"></div>
+        </div>
       </section>
 
       <section id="funding" class="view" hidden>
-        <div class="page-heading"><div><span class="eyebrow" data-i18n="deposit">DEPOSIT</span><h1 data-i18n="depositTitle">Fund your investment account</h1><p data-i18n="fundingHelp">Submit your funding details for administrative review.</p></div></div>
+        <div class="page-heading"><div><span class="eyebrow" data-i18n="deposit">FUND WALLET</span><h1 data-i18n="depositTitle">Fund your investment account</h1><p data-i18n="fundingHelp">Contact our support team directly through live chat for wallet funding instructions.</p></div></div>
         <div class="content-grid form-grid">
-          <div class="panel form-panel">
-            <div class="form-intro"><span class="big-icon green">＋</span><div><h2 data-i18n="requestFunding">Deposit request</h2><p data-i18n="depositExplain">Enter the amount and payment details. Your account balance changes only after approval.</p></div></div>
-            <form id="fundForm">
-              <label><span id="fundAmountLabel" data-i18n="amountLabel">Amount (KWD)</span><input id="fundAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
-              <label><span data-i18n="currency">Currency</span><select id="fundCurrency"><option value="KWD">KWD</option><option value="USD">USD</option><option value="EUR">EUR</option></select></label>
-              <label><span data-i18n="paymentMethod">Payment method</span><input id="fundMethod" required></label>
-              <label><span data-i18n="referenceOptional">Reference (optional)</span><input id="fundRef"></label>
-              <label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="fundNotes"></textarea></label>
-              <button id="fundBtn" class="primary-btn" type="submit"><span data-i18n="submitRequest">Submit request</span><i>→</i></button>
-            </form>
+          <div class="panel form-panel premium-action-panel">
+            <div class="form-intro"><span class="big-icon green">＋</span><div><h2 data-i18n="fundWallet">Fund wallet</h2><p data-i18n="fundWalletHelp">To receive funding instructions, contact our support team directly through live chat.</p></div></div>
+            <button id="fundChatBtn" class="primary-btn chat-fund-btn" type="button"><span data-i18n="openLiveChat">Open live chat</span><i>↗</i></button>
+            <div class="chat-request-note"><span>●</span><span data-i18n="fundChatMessage">I want to fund my wallet now</span></div>
           </div>
           <div class="panel"><div class="panel-head"><div><span class="eyebrow" data-i18n="history">HISTORY</span><h2 data-i18n="fundingHistory">Deposit requests</h2></div></div><div id="fundList" class="request-list"></div></div>
         </div>
       </section>
 
       <section id="send" class="view" hidden>
-        <div class="page-heading"><div><span class="eyebrow" data-i18n="sendMoney">SEND MONEY</span><h1 data-i18n="sendTitle">Send money</h1><p data-i18n="sendHelp">Internal transfers require a server-side transfer service before money can be moved.</p></div></div>
-        <div class="panel notice-panel">
-          <span class="big-icon blue">⇄</span>
-          <div><h2 data-i18n="sendUnavailable">Transfer service not enabled</h2><p data-i18n="sendUnavailableSub">The current account API does not provide a genuine member-to-member transfer endpoint. This page will not pretend a transfer was completed.</p></div>
+        <div class="page-heading"><div><span class="eyebrow" data-i18n="sendMoney">SEND MONEY</span><h1 data-i18n="sendTitle">Send money</h1><p data-i18n="sendHelp">Send a transfer request to a bank or financial institution.</p></div></div>
+        <div class="content-grid form-grid">
+          <div class="panel form-panel">
+            <div class="form-intro"><span class="big-icon blue">⇄</span><div><h2 data-i18n="sendUnavailable">Send transfer</h2><p data-i18n="sendTitleSub">Send money to a bank or financial institution.</p></div></div>
+            <form id="sendForm">
+              <label><span data-i18n="recipientName">Recipient name</span><input id="sendRecipient" required></label>
+              <label><span data-i18n="recipientCountry">Recipient country</span><select id="sendCountry"></select></label>
+              <label><span data-i18n="bankInstitution">Bank / financial institution</span><input id="sendBankSearch" list="sendBankOptions" data-i18n-placeholder="searchBank" placeholder="Search bank or institution" autocomplete="off" required><datalist id="sendBankOptions"></datalist></label>
+              <label><span data-i18n="recipientAccount">Account number / IBAN / email</span><input id="sendAccount" required></label>
+              <label><span data-i18n="currency">Currency</span><select id="sendCurrency"><option value="KWD">KWD</option><option value="USD">USD</option><option value="EUR">EUR</option></select></label>
+              <label><span data-i18n="transferAmount">Transfer amount</span><input id="sendAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
+              <label><span data-i18n="purposeOptional">Purpose (optional)</span><textarea id="sendPurpose"></textarea></label>
+              <div class="transfer-note" data-i18n="transferNotice">Your transfer request will be reviewed before any financial movement is completed.</div>
+              <button id="sendBtn" class="primary-btn" type="submit"><span data-i18n="sendRequest">Send transfer request</span><i>→</i></button>
+            </form>
+          </div>
+          <div class="panel transfer-side-panel">
+            <div class="panel-head"><div><span class="eyebrow" data-i18n="globalDestinations">GLOBAL DESTINATIONS</span><h2 data-i18n="bankPaymentDestinations">Banks & payment destinations</h2></div></div>
+            <p class="muted" data-i18n="transferNotice">Your transfer request will be reviewed before any financial movement is completed.</p>
+            <div class="institution-chips"><span data-i18n="transferMethods">Bank transfer</span><span data-i18n="iban">IBAN</span><span data-i18n="paypal">PayPal</span><span data-i18n="wise">Wise</span><span data-i18n="payoneer">Payoneer</span><span data-i18n="revolut">Revolut</span></div>
+          </div>
         </div>
       </section>
 
       <section id="withdraw" class="view" hidden>
-        <div class="page-heading"><div><span class="eyebrow" data-i18n="withdraw">WITHDRAW</span><h1 data-i18n="withdrawTitle">Withdraw from your account</h1><p data-i18n="withdrawHelp">Request an amount from your available balance. The balance is deducted after approval.</p></div></div>
+        <div class="page-heading"><div><span class="eyebrow" data-i18n="withdraw">WITHDRAW</span><h1 data-i18n="withdrawTitle">Withdraw from your account</h1><p data-i18n="withdrawHelp">Request an amount from your available balance. The request is reviewed by administration.</p></div></div>
         <div class="content-grid form-grid">
           <div class="panel form-panel">
-            <div class="form-intro"><span class="big-icon purple">↗</span><div><h2 data-i18n="requestWithdraw">Withdrawal request</h2><p data-i18n="withdrawExplain">Enter your requested amount and destination. Requests are reviewed before approval.</p></div></div>
+            <div class="form-intro"><span class="big-icon purple">↗</span><div><h2 data-i18n="requestWithdraw">Withdrawal request</h2><p data-i18n="withdrawExplain">Enter your amount and receiving bank details. Requests are reviewed before approval.</p></div></div>
             <form id="withdrawForm">
               <label><span id="withAmountLabel" data-i18n="amountLabel">Amount (KWD)</span><input id="withAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
               <label><span data-i18n="currency">Currency</span><select id="withCurrency"><option value="KWD">KWD</option><option value="USD">USD</option><option value="EUR">EUR</option></select></label>
-              <label><span data-i18n="method">Method</span><input id="withMethod" required></label>
-              <label><span data-i18n="destination">Transfer destination</span><input id="withDest" required></label>
+              <label><span data-i18n="withdrawCountry">Bank country</span><select id="withCountry"></select></label>
+              <label><span data-i18n="withdrawBank">Receiving bank</span><input id="withBankSearch" list="withBankOptions" data-i18n-placeholder="withdrawBankSearch" placeholder="Search bank" autocomplete="off" required><datalist id="withBankOptions"></datalist></label>
+              <label><span data-i18n="accountHolder">Account holder name</span><input id="withHolder" required></label>
+              <label><span data-i18n="accountNumber">Account number / IBAN</span><input id="withAccount" required></label>
               <label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="withNotes"></textarea></label>
               <button id="withBtn" class="primary-btn" type="submit"><span data-i18n="submitRequest">Submit request</span><i>→</i></button>
             </form>
