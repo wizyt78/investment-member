@@ -2,48 +2,56 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#071c18">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>Investment Portal — Member</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071d19">
+<meta name="color-scheme" content="light dark">
+<title>Investment Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260909-premium2">
+<link rel="stylesheet" href="styles.css?v=20260909premium">
 </head>
 <body>
 <div id="toast" class="toast" role="status"></div>
 
+<!-- Authentication: intentionally kept on the same API/session flow as the working Member build. -->
 <section id="auth" class="auth-shell">
-  <div class="auth-orb orb-one"></div><div class="auth-orb orb-two"></div>
-  <header class="auth-header">
+  <header class="auth-top">
     <a class="brand-lockup" href="#" aria-label="Investment Portal">
-      <img src="logo.svg" alt="Investment Portal logo">
-      <span><strong>Investment Portal</strong><small data-i18n="memberAccess">Member access</small></span>
+      <img src="logo.svg" alt="Investment Portal">
+      <span><strong>Investment Portal</strong><small data-i18n="secureAccess">دخول الأعضاء الآمن</small></span>
     </a>
-    <button id="lang" class="outline-btn">English</button>
+    <button id="lang" class="outline-btn" type="button">English</button>
   </header>
-  <div class="auth-grid">
-    <div class="auth-message">
-      <span class="eyebrow" data-i18n="memberPortal">MEMBER PORTAL</span>
-      <h1 data-i18n="authHeadline">Your account. Your portfolio. Your view.</h1>
-      <p data-i18n="authCopy">A secure member workspace for your recorded balance, investments, requests and account settings.</p>
-      <div class="auth-points">
-        <span><b>✓</b><span data-i18n="serverData">Server-recorded account data</span></span>
-        <span><b>✓</b><span data-i18n="secureSessions">Secure member sessions</span></span>
-        <span><b>✓</b><span data-i18n="privateWorkspace">Private account workspace</span></span>
+
+  <main class="auth-main">
+    <section class="auth-presentation">
+      <span class="eyebrow" data-i18n="memberPortal">بوابة الأعضاء</span>
+      <h1 data-i18n="welcomeHeadline">حسابك المالي في مكان واحد.</h1>
+      <p data-i18n="welcomeCopy">تابع رصيدك واستثماراتك وطلباتك من مساحة حساب آمنة وواضحة.</p>
+      <div class="feature-list">
+        <div><span>✓</span><b data-i18n="serverData">بيانات الحساب المسجلة على الخادم</b></div>
+        <div><span>✓</span><b data-i18n="secureSessions">جلسات دخول آمنة</b></div>
+        <div><span>✓</span><b data-i18n="privateWorkspace">مساحة حساب خاصة</b></div>
       </div>
-    </div>
-    <div class="auth-card">
-      <img class="auth-logo" src="logo.svg" alt="Investment Portal logo">
-      <div class="auth-head"><span class="eyebrow" data-i18n="secureSignIn">SECURE SIGN IN</span><h2 id="authTitle">مرحباً بعودتك</h2><p id="authSub">سجّل الدخول باستخدام اسم المستخدم وكلمة المرور.</p></div>
-      <form id="loginForm" novalidate>
+    </section>
+
+    <section class="auth-card">
+      <div class="auth-card-head">
+        <img class="auth-logo" src="logo.svg" alt="Investment Portal">
+        <span class="eyebrow" data-i18n="secureSignIn">SECURE SIGN IN</span>
+        <h2 id="authTitle">مرحباً بعودتك</h2>
+        <p id="authSub">سجّل الدخول باستخدام اسم المستخدم وكلمة المرور.</p>
+      </div>
+
+      <form id="loginForm" class="auth-form">
         <label><span data-i18n="username">اسم المستخدم</span><input id="loginUser" autocomplete="username" required></label>
         <label><span data-i18n="password">كلمة المرور</span><input id="loginPass" type="password" autocomplete="current-password" required></label>
         <button id="loginBtn" class="primary-btn" type="submit"><span data-i18n="signIn">تسجيل الدخول</span><i>→</i></button>
         <p class="switch"><span data-i18n="noAccount">ليس لديك حساب؟</span> <button type="button" id="showSignup" class="text-btn" data-i18n="createAccount">إنشاء حساب</button></p>
       </form>
-      <form id="signupForm" hidden novalidate>
+
+      <form id="signupForm" class="auth-form" hidden>
         <label><span data-i18n="fullName">الاسم الكامل</span><input id="fullName" autocomplete="name" required></label>
         <label><span data-i18n="email">البريد الإلكتروني</span><input id="signupEmail" type="email" autocomplete="email" required></label>
         <label><span data-i18n="username">اسم المستخدم</span><input id="signupUser" autocomplete="username" required></label>
@@ -52,93 +60,198 @@
         <button id="signupBtn" class="primary-btn" type="submit"><span data-i18n="createAccount">إنشاء حساب</span><i>→</i></button>
         <p class="switch"><span data-i18n="haveAccount">لديك حساب؟</span> <button type="button" id="showLogin" class="text-btn" data-i18n="signIn">تسجيل الدخول</button></p>
       </form>
-    </div>
-  </div>
+    </section>
+  </main>
 </section>
 
 <section id="dash" hidden>
-<header class="topbar">
-  <div class="brand-lockup top-brand"><img src="logo.svg" alt="Investment Portal logo"><span><strong>Investment Portal</strong><small data-i18n="memberArea">Member area</small></span></div>
-  <div class="top-actions">
-    <button id="themeToggle" class="icon-btn" type="button" aria-label="Theme">☼</button>
-    <button id="lang2" class="outline-btn">العربية</button>
-    <button id="logout" class="outline-btn" data-i18n="logout">خروج</button>
-    <button id="profileMini" class="user-mini" type="button"><span id="miniAvatar" class="avatar avatar-sm">A</span><span><b id="miniName">Member</b><small data-i18n="member">Member</small></span><em>⌄</em></button>
+  <header class="appbar">
+    <div class="appbar-inner">
+      <button id="mobileMenu" class="icon-btn mobile-only" type="button" aria-label="Menu">☰</button>
+      <a class="brand-lockup" href="#" data-view-link="overview">
+        <img src="logo.svg" alt="Investment Portal">
+        <span><strong>Investment Portal</strong><small data-i18n="memberArea">منطقة العضو</small></span>
+      </a>
+      <div class="app-actions">
+        <button id="theme" class="icon-btn" type="button" aria-label="Theme">◐</button>
+        <button id="lang2" class="outline-btn" type="button">English</button>
+        <button id="logout" class="outline-btn" type="button" data-i18n="logout">خروج</button>
+        <button id="profileTop" class="user-chip" type="button" data-view-link="settings">
+          <span id="avatarTop" class="avatar">U</span><span id="topName">Member</span><b>⌄</b>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-user">
+        <span id="avatarSide" class="avatar avatar-lg">U</span>
+        <div><strong id="sideName">Member</strong><small id="sideUsername">@member</small></div>
+      </div>
+      <nav class="side-nav">
+        <button data-view="overview" class="nav-item active"><span>⌂</span><b data-i18n="home">Home</b></button>
+        <button data-view="funding" class="nav-item"><span>＋</span><b data-i18n="deposit">Deposit</b></button>
+        <button data-view="send" class="nav-item"><span>⇄</span><b data-i18n="sendMoney">Send Money</b></button>
+        <button data-view="withdraw" class="nav-item"><span>↗</span><b data-i18n="withdraw">Withdraw</b></button>
+        <button data-view="settings" class="nav-item"><span>⚙</span><b data-i18n="settings">Settings</b></button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="secure-note"><span>✓</span><div><b data-i18n="secureAccount">Secure account</b><small data-i18n="secureAccountSub">Your session is protected.</small></div></div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <div class="mobile-header">
+        <div><span class="eyebrow" data-i18n="home">HOME</span><h1 id="mobileWelcome">Welcome</h1></div>
+        <span id="mobileAvatar" class="avatar">U</span>
+      </div>
+
+      <section id="overview" class="view">
+        <div class="page-heading">
+          <div><span class="eyebrow" data-i18n="home">HOME</span><h1 id="welcome">مرحباً</h1><p data-i18n="dashboardSub">نظرة احترافية على حسابك واستثماراتك.</p></div>
+          <span class="status-pill"><i></i><span data-i18n="active">الحساب نشط</span></span>
+        </div>
+
+        <div class="hero-balance">
+          <div class="hero-content">
+            <div class="hero-top"><span data-i18n="availableBalance">الرصيد المتاح</span><button id="hideBalance" class="balance-toggle" type="button">◉</button></div>
+            <strong id="balance">0.000 KWD</strong>
+            <small data-i18n="realServerBalance">الرصيد المسجل في الحساب</small>
+            <div class="hero-actions">
+              <button class="gold-btn" data-view="funding"><span>＋</span><span data-i18n="depositNow">Deposit now</span></button>
+              <button class="hero-outline" data-view="withdraw"><span>↗</span><span data-i18n="withdrawFunds">Withdraw funds</span></button>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="vault">▣</div><div class="coin c1">K</div><div class="coin c2">K</div><div class="coin c3">K</div></div>
+        </div>
+
+        <div class="quick-actions">
+          <button class="action-card" data-view="funding"><span class="action-icon green">＋</span><div><b data-i18n="deposit">Deposit</b><small data-i18n="depositSub">Fund your account</small></div><i>›</i></button>
+          <button class="action-card" data-view="send"><span class="action-icon blue">⇄</span><div><b data-i18n="sendMoney">Send Money</b><small data-i18n="sendSub">Transfer request</small></div><i>›</i></button>
+          <button class="action-card" data-view="withdraw"><span class="action-icon purple">↗</span><div><b data-i18n="withdraw">Withdraw</b><small data-i18n="withdrawSub">Request your funds</small></div><i>›</i></button>
+          <button class="action-card" data-view="settings"><span class="action-icon gold">⚙</span><div><b data-i18n="settings">Settings</b><small data-i18n="settingsSub">Manage your account</small></div><i>›</i></button>
+        </div>
+
+        <div class="metrics">
+          <article><span class="metric-icon">▣</span><div><small data-i18n="totalInvested">Total invested</small><strong id="invested">0.000 KWD</strong></div></article>
+          <article><span class="metric-icon">↗</span><div><small data-i18n="recordedEarnings">Recorded earnings</small><strong id="earnings">0.000 KWD</strong></div></article>
+          <article><span class="metric-icon">⌁</span><div><small data-i18n="investmentCount">Active investments</small><strong id="invCount">0</strong></div></article>
+          <article><span class="metric-icon">◷</span><div><small data-i18n="pendingRequests">Pending requests</small><strong id="pendingCount">0</strong></div></article>
+        </div>
+
+        <div class="content-grid">
+          <div class="panel">
+            <div class="panel-head"><div><span class="eyebrow" data-i18n="activity">ACTIVITY</span><h2 data-i18n="transactions">Recent transactions</h2></div><button id="refresh" class="small-btn" type="button" data-i18n="refresh">Refresh</button></div>
+            <div id="transactions" class="table"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="eyebrow" data-i18n="portfolio">PORTFOLIO</span><h2 data-i18n="investments">Investments</h2></div></div>
+            <div id="investments" class="investment-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="funding" class="view" hidden>
+        <div class="page-heading"><div><span class="eyebrow" data-i18n="deposit">DEPOSIT</span><h1 data-i18n="depositTitle">Fund your investment account</h1><p data-i18n="fundingHelp">Submit your funding details for administrative review.</p></div></div>
+        <div class="content-grid form-grid">
+          <div class="panel form-panel">
+            <div class="form-intro"><span class="big-icon green">＋</span><div><h2 data-i18n="requestFunding">Deposit request</h2><p data-i18n="depositExplain">Enter the amount and payment details. Your account balance changes only after approval.</p></div></div>
+            <form id="fundForm">
+              <label><span data-i18n="amountKwd">Amount (KWD)</span><input id="fundAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
+              <label><span data-i18n="paymentMethod">Payment method</span><input id="fundMethod" required></label>
+              <label><span data-i18n="referenceOptional">Reference (optional)</span><input id="fundRef"></label>
+              <label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="fundNotes"></textarea></label>
+              <button id="fundBtn" class="primary-btn" type="submit"><span data-i18n="submitRequest">Submit request</span><i>→</i></button>
+            </form>
+          </div>
+          <div class="panel"><div class="panel-head"><div><span class="eyebrow" data-i18n="history">HISTORY</span><h2 data-i18n="fundingHistory">Deposit requests</h2></div></div><div id="fundList" class="request-list"></div></div>
+        </div>
+      </section>
+
+      <section id="send" class="view" hidden>
+        <div class="page-heading"><div><span class="eyebrow" data-i18n="sendMoney">SEND MONEY</span><h1 data-i18n="sendTitle">Send money</h1><p data-i18n="sendHelp">Internal transfers require a server-side transfer service before money can be moved.</p></div></div>
+        <div class="panel notice-panel">
+          <span class="big-icon blue">⇄</span>
+          <div><h2 data-i18n="sendUnavailable">Transfer service not enabled</h2><p data-i18n="sendUnavailableSub">The current account API does not provide a genuine member-to-member transfer endpoint. This page will not pretend a transfer was completed.</p></div>
+        </div>
+      </section>
+
+      <section id="withdraw" class="view" hidden>
+        <div class="page-heading"><div><span class="eyebrow" data-i18n="withdraw">WITHDRAW</span><h1 data-i18n="withdrawTitle">Withdraw from your account</h1><p data-i18n="withdrawHelp">Request an amount from your available balance. The balance is deducted after approval.</p></div></div>
+        <div class="content-grid form-grid">
+          <div class="panel form-panel">
+            <div class="form-intro"><span class="big-icon purple">↗</span><div><h2 data-i18n="requestWithdraw">Withdrawal request</h2><p data-i18n="withdrawExplain">Enter your requested amount and destination. Requests are reviewed before approval.</p></div></div>
+            <form id="withdrawForm">
+              <label><span data-i18n="amountKwd">Amount (KWD)</span><input id="withAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
+              <label><span data-i18n="method">Method</span><input id="withMethod" required></label>
+              <label><span data-i18n="destination">Transfer destination</span><input id="withDest" required></label>
+              <label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="withNotes"></textarea></label>
+              <button id="withBtn" class="primary-btn" type="submit"><span data-i18n="submitRequest">Submit request</span><i>→</i></button>
+            </form>
+          </div>
+          <div class="panel"><div class="panel-head"><div><span class="eyebrow" data-i18n="history">HISTORY</span><h2 data-i18n="withdrawHistory">Withdrawal requests</h2></div></div><div id="withList" class="request-list"></div></div>
+        </div>
+      </section>
+
+      <section id="settings" class="view" hidden>
+        <div class="page-heading"><div><span class="eyebrow" data-i18n="settings">SETTINGS</span><h1 data-i18n="settingsTitle">Account settings</h1><p data-i18n="settingsSub">Manage your profile, email, password and appearance.</p></div></div>
+        <div class="settings-grid">
+          <div class="panel profile-card">
+            <div class="profile-cover"></div>
+            <div class="profile-body">
+              <div class="profile-avatar-wrap">
+                <span id="profileAvatar" class="avatar avatar-xl">U</span>
+                <label class="avatar-edit" for="avatarFile">＋</label>
+                <input id="avatarFile" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+              </div>
+              <div class="profile-title"><h2 id="profileName">Member</h2><span id="profileHandle">@member</span></div>
+              <p data-i18n="avatarHelp">Upload a profile picture. It is kept on this device for your Member workspace.</p>
+              <button id="removeAvatar" class="small-btn" type="button" data-i18n="removePhoto">Remove photo</button>
+            </div>
+          </div>
+
+          <div class="panel form-panel">
+            <div class="panel-head"><div><span class="eyebrow" data-i18n="profileLabel">PROFILE</span><h2 data-i18n="personalDetails">Personal details</h2></div></div>
+            <form id="profileForm">
+              <label><span data-i18n="username">Username</span><input id="pUser" disabled></label>
+              <label><span data-i18n="fullName">Full name</span><input id="pName" required></label>
+              <label><span data-i18n="email">Email address</span><input id="pEmail" type="email" required></label>
+              <button class="primary-btn" type="submit"><span data-i18n="saveProfile">Save changes</span><i>✓</i></button>
+            </form>
+          </div>
+
+          <div class="panel form-panel password-card">
+            <div class="panel-head"><div><span class="eyebrow" data-i18n="security">SECURITY</span><h2 data-i18n="changePassword">Change password</h2><p data-i18n="passwordSub">Update your password and stay signed in.</p></div></div>
+            <form id="passwordForm">
+              <label><span data-i18n="currentPassword">Current password</span><input id="currentPass" type="password" autocomplete="current-password" required></label>
+              <label><span data-i18n="newPassword">New password</span><input id="newPass" type="password" autocomplete="new-password" required></label>
+              <label><span data-i18n="confirmPassword">Confirm password</span><input id="newPass2" type="password" autocomplete="new-password" required></label>
+              <button class="primary-btn" type="submit"><span data-i18n="updatePassword">Update password</span><i>✓</i></button>
+            </form>
+          </div>
+
+          <div class="panel preference-card">
+            <div class="panel-head"><div><span class="eyebrow" data-i18n="preferences">PREFERENCES</span><h2 data-i18n="appearance">Appearance</h2></div></div>
+            <div class="preference-row"><div><b data-i18n="themeMode">Theme</b><small data-i18n="themeModeSub">Choose light or dark mode.</small></div><button id="themeSettings" class="theme-switch" type="button"><span>☼</span><i></i><span>☾</span></button></div>
+            <div class="preference-row"><div><b data-i18n="language">Language</b><small data-i18n="languageSub">Switch the complete interface language.</small></div><button id="langSettings" class="small-btn" type="button">English</button></div>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
-</header>
 
-<div class="app-shell">
-  <aside class="sidebar">
-    <div class="side-title"><span class="eyebrow" data-i18n="workspace">WORKSPACE</span><b data-i18n="memberArea">Member area</b></div>
-    <nav class="side-nav">
-      <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span><span data-i18n="home">Home</span></button>
-      <button class="nav-item" data-view="deposit"><span class="nav-icon">＋</span><span data-i18n="deposit">Deposit</span></button>
-      <button class="nav-item" data-view="send"><span class="nav-icon">↗</span><span data-i18n="sendMoney">Send Money</span></button>
-      <button class="nav-item" data-view="withdraw"><span class="nav-icon">↓</span><span data-i18n="withdraw">Withdraw</span></button>
-      <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span><span data-i18n="settings">Settings</span></button>
-    </nav>
-    <div class="side-support"><span>●</span><div><b data-i18n="support">Support</b><small data-i18n="supportCopy">Live assistance is available.</small></div></div>
-  </aside>
-
-  <main class="main-content">
-    <section id="home" class="view">
-      <div class="page-heading"><div><span class="eyebrow" data-i18n="overview">OVERVIEW</span><h1 id="welcome">مرحباً</h1><p data-i18n="dashboardSub">A clear view of your account and portfolio.</p></div><span class="status-pill"><i></i><span data-i18n="active">Account active</span></span></div>
-      <div class="hero-grid">
-        <article class="balance-hero">
-          <div class="hero-top"><span data-i18n="totalBalance">Total balance</span><button id="refresh" class="hero-refresh" type="button">↻ <span data-i18n="refresh">Refresh</span></button></div>
-          <strong id="balance">0.000 KWD</strong><small data-i18n="realServerBalance">Balance recorded on your account</small>
-          <div class="hero-actions"><button class="gold-btn" data-view="deposit"><span>＋</span><span data-i18n="depositNow">Deposit now</span></button><button class="dark-outline-btn" data-view="transactions"><span data-i18n="viewTransactions">View transactions</span><span>→</span></button></div>
-          <div class="hero-pattern"></div>
-        </article>
-        <article class="account-card">
-          <div class="account-top"><div class="avatar avatar-lg" id="accountAvatar">A</div><div><h2 id="accountName">Member</h2><p id="accountUsername">@member</p></div><button class="outline-btn edit-profile" data-view="settings" data-i18n="editProfile">Edit profile</button></div>
-          <div class="account-meta"><div><span>✉</span><b id="accountEmail">—</b><small data-i18n="email">Email</small></div><div><span>◷</span><b id="memberSince">—</b><small data-i18n="memberSince">Member since</small></div></div>
-        </article>
-      </div>
-      <div class="action-grid">
-        <button class="action-card green" data-view="deposit"><span class="action-icon">＋</span><span><b data-i18n="deposit">Deposit</b><small data-i18n="depositSub">Fund your account</small></span><em>→</em></button>
-        <button class="action-card blue" data-view="send"><span class="action-icon">↗</span><span><b data-i18n="sendMoney">Send Money</b><small data-i18n="sendSub">Transfer funds</small></span><em>→</em></button>
-        <button class="action-card purple" data-view="withdraw"><span class="action-icon">↓</span><span><b data-i18n="withdraw">Withdraw</b><small data-i18n="withdrawSub">Request your funds</small></span><em>→</em></button>
-        <button class="action-card gold" data-view="settings"><span class="action-icon">⚙</span><span><b data-i18n="settings">Settings</b><small data-i18n="settingsSub">Manage your account</small></span><em>→</em></button>
-      </div>
-      <div class="metrics-grid"><article><span data-i18n="totalInvested">Total invested</span><strong id="invested">0.000 KWD</strong></article><article><span data-i18n="recordedEarnings">Recorded earnings</span><strong id="earnings">0.000 KWD</strong></article><article><span data-i18n="activeInvestments">Active investments</span><strong id="invCount">0</strong></article><article><span data-i18n="pendingRequests">Pending requests</span><strong id="pendingCount">0</strong></article></div>
-      <div class="content-grid">
-        <article class="panel large-panel"><div class="panel-head"><div><span class="eyebrow" data-i18n="activity">ACTIVITY</span><h2 data-i18n="transactions">Recent transactions</h2><p data-i18n="transactionsSub">Recorded activity on your account.</p></div><button class="outline-btn" data-view="transactions" data-i18n="viewAll">View all</button></div><div id="transactions" class="table"></div></article>
-        <article class="panel promo-panel"><span class="eyebrow" data-i18n="portfolio">PORTFOLIO</span><h2 data-i18n="portfolioTitle">Your investment portfolio</h2><p data-i18n="portfolioCopy">Only investments recorded on your account appear here.</p><div class="portfolio-number"><strong id="portfolioCount">0</strong><span data-i18n="investments">Investments</span></div><button class="dark-btn" data-view="transactions" data-i18n="viewPortfolio">View portfolio</button></article>
-      </div>
-    </section>
-
-    <section id="transactions" class="view" hidden></section>
-    <section id="deposit" class="view" hidden>
-      <div class="page-heading"><div><span class="eyebrow" data-i18n="depositLabel">ACCOUNT FUNDING</span><h1 data-i18n="deposit">Deposit</h1><p data-i18n="depositPageCopy">Submit a funding request for administrative review.</p></div></div>
-      <div class="two-col"><article class="panel form-panel"><div class="form-title"><span class="big-icon">＋</span><div><h2 data-i18n="requestDeposit">Deposit request</h2><p data-i18n="fundingHelp">Submit the transaction details for review.</p></div></div><form id="fundForm"><label><span data-i18n="amountKwd">Amount (KWD)</span><input id="fundAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label><label><span data-i18n="paymentMethod">Payment method</span><input id="fundMethod" required></label><label><span data-i18n="referenceOptional">Reference (optional)</span><input id="fundRef"></label><label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="fundNotes"></textarea></label><button id="fundBtn" class="primary-btn" type="submit"><span data-i18n="submitRequest">Submit request</span><i>→</i></button></form></article><article class="panel request-panel"><div class="panel-head"><div><span class="eyebrow" data-i18n="history">HISTORY</span><h2 data-i18n="fundingHistory">Deposit requests</h2></div></div><div id="fundList"></div></article></div>
-    </section>
-
-    <section id="send" class="view" hidden>
-      <div class="page-heading"><div><span class="eyebrow" data-i18n="internalTransfer">INTERNAL TRANSFER</span><h1 data-i18n="sendMoney">Send Money</h1><p data-i18n="sendPageCopy">Prepare an internal transfer request using the available account balance.</p></div></div>
-      <article class="panel form-panel narrow-panel"><div class="form-title"><span class="big-icon">↗</span><div><h2 data-i18n="sendMoney">Send Money</h2><p data-i18n="sendUnavailableNote">Transfers require a supported server-side transfer route.</p></div></div><div class="notice"><b data-i18n="comingBackend">Transfer processing is not enabled by the current account API.</b><span data-i18n="noFabrication">No transfer will be recorded until the server provides the transfer endpoint.</span></div></article>
-    </section>
-
-    <section id="withdraw" class="view" hidden>
-      <div class="page-heading"><div><span class="eyebrow" data-i18n="withdrawLabel">ACCOUNT WITHDRAWAL</span><h1 data-i18n="withdraw">Withdraw</h1><p data-i18n="withdrawPageCopy">Request funds from your available recorded balance.</p></div></div>
-      <div class="two-col"><article class="panel form-panel"><div class="form-title"><span class="big-icon">↓</span><div><h2 data-i18n="requestWithdraw">Withdrawal request</h2><p data-i18n="withdrawHelp">The balance is deducted after approval.</p></div></div><form id="withdrawForm"><label><span data-i18n="amountKwd">Amount (KWD)</span><input id="withAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label><label><span data-i18n="method">Method</span><input id="withMethod" required></label><label><span data-i18n="destination">Transfer destination</span><input id="withDest" required></label><label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="withNotes"></textarea></label><button id="withBtn" class="primary-btn" type="submit"><span data-i18n="submitRequest">Submit request</span><i>→</i></button></form></article><article class="panel request-panel"><div class="panel-head"><div><span class="eyebrow" data-i18n="history">HISTORY</span><h2 data-i18n="withdrawHistory">Withdrawal requests</h2></div></div><div id="withList"></div></article></div>
-    </section>
-
-    <section id="settings" class="view" hidden>
-      <div class="page-heading"><div><span class="eyebrow" data-i18n="accountSettings">ACCOUNT SETTINGS</span><h1 data-i18n="settings">Settings</h1><p data-i18n="settingsPageCopy">Manage your profile, login email, password and appearance.</p></div></div>
-      <div class="settings-grid">
-        <article class="panel profile-panel"><div class="settings-head"><div><span class="eyebrow" data-i18n="profile">PROFILE</span><h2 data-i18n="profileDetails">Profile details</h2></div><div class="profile-photo-wrap"><div id="settingsAvatar" class="avatar avatar-xl">A</div><label class="upload-btn"><input id="avatarFile" type="file" accept="image/*"><span data-i18n="uploadPhoto">Upload photo</span></label></div></div><form id="profileForm"><label><span data-i18n="username">Username</span><input id="pUser" disabled></label><label><span data-i18n="fullName">Full name</span><input id="pName" required></label><label><span data-i18n="email">Email address</span><input id="pEmail" type="email" autocomplete="email" required></label><button class="primary-btn" type="submit"><span data-i18n="saveProfile">Save profile</span><i>✓</i></button></form></article>
-        <article class="panel security-panel"><div class="settings-head"><div><span class="eyebrow" data-i18n="security">SECURITY</span><h2 data-i18n="changePassword">Change password</h2></div><span class="security-icon">⌁</span></div><form id="passwordForm"><label><span data-i18n="currentPassword">Current password</span><input id="currentPass" type="password" autocomplete="current-password" required></label><label><span data-i18n="newPassword">New password</span><input id="newPass" type="password" autocomplete="new-password" required></label><label><span data-i18n="confirmNewPassword">Confirm new password</span><input id="newPass2" type="password" autocomplete="new-password" required></label><button class="primary-btn" type="submit"><span data-i18n="updatePassword">Update password</span><i>✓</i></button></form></article>
-      </div>
-      <div class="settings-bottom"><article class="panel preference-panel"><div><span class="eyebrow" data-i18n="preferences">PREFERENCES</span><h2 data-i18n="appearance">Appearance</h2><p data-i18n="appearanceCopy">Choose the interface theme for this device.</p></div><div class="theme-options"><button class="theme-choice" data-theme-choice="light"><span>☼</span><b data-i18n="light">Light</b></button><button class="theme-choice" data-theme-choice="dark"><span>◐</span><b data-i18n="dark">Dark</b></button></div></article></div>
-    </section>
-  </main>
-</div>
-
-<nav class="mobile-nav"><button class="nav-item active" data-view="home"><span>⌂</span><small data-i18n="home">Home</small></button><button class="nav-item" data-view="deposit"><span>＋</span><small data-i18n="deposit">Deposit</small></button><button class="nav-item" data-view="send"><span>↗</span><small data-i18n="sendMoney">Send Money</small></button><button class="nav-item" data-view="withdraw"><span>↓</span><small data-i18n="withdraw">Withdraw</small></button><button class="nav-item" data-view="settings"><span>⚙</span><small data-i18n="settings">Settings</small></button></nav>
+  <nav class="mobile-nav">
+    <button data-view="overview" class="active"><span>⌂</span><b data-i18n="home">Home</b></button>
+    <button data-view="funding"><span>＋</span><b data-i18n="deposit">Deposit</b></button>
+    <button data-view="send"><span>⇄</span><b data-i18n="sendMoney">Send</b></button>
+    <button data-view="withdraw"><span>↗</span><b data-i18n="withdraw">Withdraw</b></button>
+    <button data-view="settings"><span>⚙</span><b data-i18n="settings">Settings</b></button>
+  </nav>
 </section>
 
-<script src="config.js?v=20260909-premium2"></script>
-<script src="app.js?v=20260909-premium2"></script>
+<script src="config.js?v=20260909premium"></script>
+<script src="app.js?v=20260909premium"></script>
 <script src="//code.jivosite.com/widget/TTgitJP3xU" async></script>
-</body></html>
+</body>
+</html>
