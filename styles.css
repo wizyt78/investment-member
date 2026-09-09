@@ -164,3 +164,24 @@ textarea{min-height:120px;resize:vertical}
    transform-origin:bottom right!important;
  }
 }
+
+
+/* Final mobile Jivo placement: keep the launcher clearly above and away from Settings. */
+@media(max-width:800px){
+  #jivo-iframe-container,
+  .jivo-iframe-container,
+  .jivo-widget-container{
+    bottom:118px!important;
+    right:8px!important;
+    transform:scale(.58)!important;
+    transform-origin:bottom right!important;
+  }
+}
+
+/* Keep carousel mechanics left-to-right even when the page is RTL.
+   This makes Arabic use the same visible slide geometry as English. */
+.profile-carousel,
+.profile-viewport,
+.profile-track{direction:ltr}
+html[dir="rtl"] .profile-slide{direction:rtl}
+html[dir="rtl"] .profile-arrow{direction:ltr}
