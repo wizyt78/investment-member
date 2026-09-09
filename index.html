@@ -67,15 +67,23 @@
 <section id="dash" hidden>
   <header class="appbar">
     <div class="appbar-inner">
-      <button id="mobileMenu" class="icon-btn mobile-only" type="button" aria-label="Menu">☰</button>
+      <button id="mobileMenu" class="icon-btn mobile-only" type="button" aria-label="Menu" data-i18n-aria="menu">☰</button>
       <a class="brand-lockup" href="#" data-view-link="overview">
         <img src="logo.svg" alt="Investment Portal">
         <span><strong>Investment Portal</strong><small data-i18n="memberArea">منطقة العضو</small></span>
       </a>
       <div class="app-actions">
-        <button id="theme" class="icon-btn" type="button" aria-label="Theme">◐</button>
+        <button id="theme" class="icon-btn" type="button" aria-label="Theme" data-i18n-aria="themeMode">◐</button>
         <button id="lang2" class="outline-btn" type="button">English</button>
-        <button id="logout" class="outline-btn" type="button" data-i18n="logout">خروج</button>
+        <label class="currency-compact" aria-label="Currency" data-i18n-aria="currency">
+          <span data-i18n="currency">Currency</span>
+          <select id="currencySelect" aria-label="Currency" data-i18n-aria="currency">
+            <option value="KWD">KWD</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+          </select>
+        </label>
+        <button id="logout" class="outline-btn" type="button" data-i18n="logout">Log out</button>
         <button id="profileTop" class="user-chip" type="button" data-view-link="settings">
           <span id="avatarTop" class="avatar">U</span><span id="topName">Member</span><b>⌄</b>
         </button>
@@ -102,10 +110,6 @@
     </aside>
 
     <main class="workspace">
-      <div class="mobile-header">
-        <div><span class="eyebrow" data-i18n="home">HOME</span><h1 id="mobileWelcome">Welcome</h1></div>
-        <span id="mobileAvatar" class="avatar">U</span>
-      </div>
 
       <section id="overview" class="view">
         <div class="page-heading">
@@ -117,7 +121,7 @@
           <div class="hero-content">
             <div class="hero-top"><span data-i18n="availableBalance">الرصيد المتاح</span><button id="hideBalance" class="balance-toggle" type="button">◉</button></div>
             <strong id="balance">0.000 KWD</strong>
-            <small data-i18n="realServerBalance">الرصيد المسجل في الحساب</small>
+            <small data-i18n="realServerBalance">إجمالي الأرباح</small>
             <div class="hero-actions">
               <button class="gold-btn" data-view="funding"><span>＋</span><span data-i18n="depositNow">Deposit now</span></button>
               <button class="hero-outline" data-view="withdraw"><span>↗</span><span data-i18n="withdrawFunds">Withdraw funds</span></button>
@@ -135,7 +139,7 @@
 
         <div class="metrics">
           <article><span class="metric-icon">▣</span><div><small data-i18n="totalInvested">Total invested</small><strong id="invested">0.000 KWD</strong></div></article>
-          <article><span class="metric-icon">↗</span><div><small data-i18n="recordedEarnings">Recorded earnings</small><strong id="earnings">0.000 KWD</strong></div></article>
+          <article><span class="metric-icon">↗</span><div><small data-i18n="totalEarnings">Total earnings</small><strong id="earnings">0.000 KWD</strong></div></article>
           <article><span class="metric-icon">⌁</span><div><small data-i18n="investmentCount">Active investments</small><strong id="invCount">0</strong></div></article>
           <article><span class="metric-icon">◷</span><div><small data-i18n="pendingRequests">Pending requests</small><strong id="pendingCount">0</strong></div></article>
         </div>
@@ -158,7 +162,7 @@
           <div class="panel form-panel">
             <div class="form-intro"><span class="big-icon green">＋</span><div><h2 data-i18n="requestFunding">Deposit request</h2><p data-i18n="depositExplain">Enter the amount and payment details. Your account balance changes only after approval.</p></div></div>
             <form id="fundForm">
-              <label><span data-i18n="amountKwd">Amount (KWD)</span><input id="fundAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
+              <label><span id="fundAmountLabel" data-i18n="amountLabel">Amount (KWD)</span><input id="fundAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
               <label><span data-i18n="paymentMethod">Payment method</span><input id="fundMethod" required></label>
               <label><span data-i18n="referenceOptional">Reference (optional)</span><input id="fundRef"></label>
               <label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="fundNotes"></textarea></label>
@@ -183,7 +187,7 @@
           <div class="panel form-panel">
             <div class="form-intro"><span class="big-icon purple">↗</span><div><h2 data-i18n="requestWithdraw">Withdrawal request</h2><p data-i18n="withdrawExplain">Enter your requested amount and destination. Requests are reviewed before approval.</p></div></div>
             <form id="withdrawForm">
-              <label><span data-i18n="amountKwd">Amount (KWD)</span><input id="withAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
+              <label><span id="withAmountLabel" data-i18n="amountLabel">Amount (KWD)</span><input id="withAmount" type="number" min="0.001" step="0.001" inputmode="decimal" required></label>
               <label><span data-i18n="method">Method</span><input id="withMethod" required></label>
               <label><span data-i18n="destination">Transfer destination</span><input id="withDest" required></label>
               <label><span data-i18n="notesOptional">Notes (optional)</span><textarea id="withNotes"></textarea></label>
@@ -234,6 +238,7 @@
           <div class="panel preference-card">
             <div class="panel-head"><div><span class="eyebrow" data-i18n="preferences">PREFERENCES</span><h2 data-i18n="appearance">Appearance</h2></div></div>
             <div class="preference-row"><div><b data-i18n="themeMode">Theme</b><small data-i18n="themeModeSub">Choose light or dark mode.</small></div><button id="themeSettings" class="theme-switch" type="button"><span>☼</span><i></i><span>☾</span></button></div>
+            <div class="preference-row"><div><b data-i18n="currency">Currency</b><small data-i18n="currencySub">Choose the display currency for your account.</small></div><select id="currencySettings" class="small-select" aria-label="Currency" data-i18n-aria="currency"><option value="KWD">KWD</option><option value="USD">USD</option><option value="EUR">EUR</option></select></div>
             <div class="preference-row"><div><b data-i18n="language">Language</b><small data-i18n="languageSub">Switch the complete interface language.</small></div><button id="langSettings" class="small-btn" type="button">English</button></div>
           </div>
         </div>
