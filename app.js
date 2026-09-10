@@ -29,7 +29,7 @@ fxUnavailable:"سعر الصرف غير متاح حالياً. يرجى المح
 en:{
 secureAccess:"Secure member access",memberPortal:"MEMBER PORTAL",welcomeHeadline:"Your financial account, in one place.",welcomeCopy:"Follow your balance, investments and requests from a secure, focused account workspace.",serverData:"Server-recorded account data",secureSessions:"Secure sessions",privateWorkspace:"Private account workspace",secureSignIn:"SECURE SIGN IN",welcomeBack:"Welcome back",loginSub:"Sign in with your username and password.",createSub:"Create your account with your basic details.",username:"Username",password:"Password",signIn:"Sign in",noAccount:"Don't have an account?",haveAccount:"Already have an account?",createAccount:"Create account",fullName:"Full name",email:"Email address",confirmPassword:"Confirm password",memberArea:"Member area",logout:"Log out",home:"Home",deposit:"Deposit",depositSub:"Fund your account",sendMoney:"Send Money",sendSub:"Transfer request",withdraw:"Withdraw",withdrawSub:"Request your funds",settings:"Settings",settingsSub:"Manage your account",dashboardSub:"A professional view of your account and investments.",active:"Account active",availableBalance:"Available balance",realServerBalance:"Balance recorded on the account",depositNow:"Deposit now",withdrawFunds:"Withdraw funds",totalInvested:"Total invested",recordedEarnings:"Recorded earnings",investmentCount:"Active investments",pendingRequests:"Pending requests",activity:"ACTIVITY",portfolio:"PORTFOLIO",transactions:"Recent transactions",investments:"Investments",refresh:"Refresh",history:"HISTORY",depositTitle:"Fund your investment account",fundingHelp:"Submit your funding details for administrative review.",requestFunding:"Deposit request",depositExplain:"Enter the amount and payment details. Your balance changes only after approval.",amountKwd:"Amount (KWD)",paymentMethod:"Payment method",referenceOptional:"Reference (optional)",notesOptional:"Notes (optional)",submitRequest:"Submit request",fundingHistory:"Deposit requests",sendTitle:"Send money",sendHelp:"Send a transfer request to a bank or financial institution.",sendUnavailable:"Send transfer",sendUnavailableSub:"",withdrawTitle:"Withdraw from your account",withdrawHelp:"Request an amount from your available balance. The balance is deducted after approval.",requestWithdraw:"Withdrawal request",withdrawExplain:"Enter your requested amount and destination. Requests are reviewed before approval.",method:"Method",destination:"Transfer destination",withdrawHistory:"Withdrawal requests",settingsTitle:"Account settings",settingsSub:"Manage your profile, email, password and appearance.",profileLabel:"PROFILE",personalDetails:"Personal details",avatarHelp:"Upload a profile picture. It is kept on this device for your Member workspace.",removePhoto:"Remove photo",security:"SECURITY",changePassword:"Change password",passwordSub:"Update your password and stay signed in.",currentPassword:"Current password",newPassword:"New password",updatePassword:"Update password",preferences:"PREFERENCES",appearance:"Appearance",themeMode:"Theme",themeModeSub:"Choose light or dark mode.",language:"Language",languageSub:"Switch the complete interface language.",secureAccount:"Secure account",secureAccountSub:"Your account session is protected.",profileSaved:"Account details saved.",passwordChanged:"Password changed successfully.",photoSaved:"Profile photo saved on this device.",photoRemoved:"Photo removed.",badPassword:"The passwords do not match.",accountCreated:"Account created. You can sign in now.",requestSent:"Request submitted for review.",connection:"Unable to connect to the server.",noTransactions:"No transactions recorded.",noInvestments:"No investments recorded.",noFunding:"No deposit requests.",noWithdrawals:"No withdrawal requests.",current:"Current",status:"Status",description:"Description",amount:"Amount",date:"Date",
 currency:"Currency",currencySub:"Choose the display currency for your account.",amountLabel:"Amount (KWD)",totalEarnings:"Total earnings",saveProfile:"Save changes",
-memberHighlights:"MEMBER HIGHLIGHTS",topMembers:"Top Members",verifiedResults:"Verified results",ownerRole:"Owner",managerRole:"Manager",memberRole:"Member",profileEarnings:"Earnings",replaceProfilePhotos:"Replace the profile files in the profiles folder with the correct photos, keeping the same filenames.",menu:"Menu",theme:"Appearance",saved:"Saved.",statusCompleted:"Completed",statusApproved:"Approved",statusPending:"Pending",statusRejected:"Rejected",statusActive:"Active",
+memberHighlights:"MEMBER HIGHLIGHTS",topMembers:"Top Members",verifiedResults:"Verified results",ownerRole:"Owner",managerRole:"Manager",memberRole:"Member",profileEarnings:"Earnings",replaceProfilePhotos:"Replace the profile files in the profiles folder with the correct photos, keeping the same filenames.",menu:"Menu",theme:"Theme",saved:"Saved.",statusCompleted:"Completed",statusApproved:"Approved",statusPending:"Pending",statusRejected:"Rejected",statusActive:"Active",
 light:"Light",dark:"Dark",profilePicture:"Profile picture",choosePhoto:"Choose photo",logoutSuccess:"You have been signed out.",
 fxUnavailable:"The exchange rate is currently unavailable. Please try again later.",logoutConfirm:"Are you sure you want to sign out?",fundWallet:"Fund wallet",fundWalletHelp:"To receive funding instructions, contact our support team directly through live chat.",openLiveChat:"Open live chat",fundChatMessage:"I want to fund my wallet now",sendTitleSub:"Send money to a bank or financial institution",recipientName:"Recipient name",recipientCountry:"Recipient country",bankInstitution:"Bank / financial institution",searchBank:"Search bank or institution",recipientAccount:"Account number / IBAN / email",transferAmount:"Transfer amount",purposeOptional:"Purpose (optional)",sendRequest:"Send transfer request",transferNotice:"Your transfer request will be reviewed before any financial movement is completed.",countryKuwait:"Kuwait",countrySaudi:"Saudi Arabia",countryUAE:"United Arab Emirates",countryBahrain:"Bahrain",countryQatar:"Qatar",countryOman:"Oman",countryEgypt:"Egypt",countryJordan:"Jordan",countryTurkey:"Turkey",countryUSA:"United States",countryUK:"United Kingdom",countryGermany:"Germany",countryFrance:"France",countryCanada:"Canada",countryAustralia:"Australia",countryIndia:"India",countryPakistan:"Pakistan",countryNigeria:"Nigeria",countryGhana:"Ghana",countrySouthAfrica:"South Africa",countryOther:"Other country",bankOther:"Other bank / institution",withdrawBank:"Receiving bank",accountHolder:"Account holder name",accountNumber:"Account number / IBAN",withdrawCountry:"Bank country",withdrawBankSearch:"Search bank",adminMessage:"Message from administration",notifications:"Account messages",noNotifications:"No new messages.",requestStatus:"Request status",globalDestinations:"Global destinations",bankPaymentDestinations:"Banks & payment destinations",transferMethods:"Bank transfer",iban:"IBAN",paypal:"PayPal",wise:"Wise",payoneer:"Payoneer",revolut:"Revolut",
 }};
@@ -140,7 +140,16 @@ function applyLang(){
  if(data)render();
 }
 function toggleLang(){lang=lang==="ar"?"en":"ar";localStorage.setItem("ip_lang",lang);applyLang()}
-function applyTheme(){document.documentElement.classList.toggle("dark",theme==="dark");localStorage.setItem("ip_theme",theme);const i=$("themeSidebarIcon");if(i)i.textContent=theme==="dark"?"☾":"☼"}
+function applyTheme(){
+ document.documentElement.classList.toggle("dark",theme==="dark");
+ localStorage.setItem("ip_theme",theme);
+ const state=$("themeSidebarState");
+ if(state)state.textContent=T[lang][theme==="dark"?"dark":"light"];
+ const top=$("theme");
+ if(top)top.setAttribute("aria-label",T[lang].themeMode);
+ const side=$("themeSidebar");
+ if(side)side.setAttribute("aria-label",T[lang].themeMode);
+}
 function toggleTheme(){theme=theme==="dark"?"light":"dark";applyTheme()}
 applyTheme();
 window.addEventListener("pageshow",()=>{if(token&&!data)load().catch(()=>{});});
@@ -232,7 +241,8 @@ async function load(){
 }
 
 $("lang").onclick=toggleLang;$("lang2").onclick=toggleLang;$("langSettings").onclick=toggleLang;
-$("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;$("themeSidebar")?.addEventListener("click",toggleTheme);
+$("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;
+$("themeSidebar").onclick=toggleTheme;
 $("currencySelect").onchange=e=>setCurrency(e.target.value);
 $("currencySettings").onchange=e=>setCurrency(e.target.value);
 $("logout").onclick=async()=>{
@@ -376,6 +386,25 @@ refreshBankFields();
 applyLang();
 loadFxRates().then(()=>{if(data)render()});
 (async()=>{
+  const params=new URLSearchParams(window.location.search);
+  const handoff=params.get("admin_handoff");
+  if(handoff){
+    try{
+      const d=await api("/api/auth/admin-handoff",{method:"POST",body:JSON.stringify({token:handoff})});
+      const session=typeof d.session==="string"?d.session:d.session?.token;
+      if(session){
+        token=session;localStorage.setItem("ip_token",token);
+        params.delete("admin_handoff");
+        const clean=window.location.pathname+(params.toString()?"?"+params.toString():"")+window.location.hash;
+        window.history.replaceState({},document.title,clean);
+        await load();
+        return;
+      }
+    }catch(e){
+      // Do not disturb a normal saved Member session if the handoff endpoint is unavailable.
+      toast(e.message);
+    }
+  }
   if(!token)return;
   try{
     await load();
