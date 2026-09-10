@@ -1,7 +1,7 @@
 const API=window.API_BASE_URL;
 let token=localStorage.getItem("ip_token")||"",data=null;
 let lang=localStorage.getItem("ip_lang")||"ar";
-let theme=localStorage.getItem("ip_theme")||"light";
+let theme=localStorage.getItem("ip_theme")||"dark";
 let balanceHidden=false;
 let currency=localStorage.getItem("ip_currency")||"KWD";
 let fxRates={KWD:1,USD:null,EUR:null};
@@ -140,7 +140,7 @@ function applyLang(){
  if(data)render();
 }
 function toggleLang(){lang=lang==="ar"?"en":"ar";localStorage.setItem("ip_lang",lang);applyLang()}
-function applyTheme(){document.documentElement.classList.toggle("dark",theme==="dark");localStorage.setItem("ip_theme",theme)}
+function applyTheme(){document.documentElement.classList.toggle("dark",theme==="dark");localStorage.setItem("ip_theme",theme);const i=$("themeSidebarIcon");if(i)i.textContent=theme==="dark"?"☾":"☼"}
 function toggleTheme(){theme=theme==="dark"?"light":"dark";applyTheme()}
 applyTheme();
 window.addEventListener("pageshow",()=>{if(token&&!data)load().catch(()=>{});});
@@ -232,7 +232,7 @@ async function load(){
 }
 
 $("lang").onclick=toggleLang;$("lang2").onclick=toggleLang;$("langSettings").onclick=toggleLang;
-$("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;
+$("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;$("themeSidebar").onclick=toggleTheme;
 $("currencySelect").onchange=e=>setCurrency(e.target.value);
 $("currencySettings").onchange=e=>setCurrency(e.target.value);
 $("logout").onclick=async()=>{
