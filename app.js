@@ -232,7 +232,7 @@ async function load(){
 }
 
 $("lang").onclick=toggleLang;$("lang2").onclick=toggleLang;$("langSettings").onclick=toggleLang;
-$("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;$("themeSidebar").onclick=toggleTheme;
+$("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;$("themeSidebar")?.addEventListener("click",toggleTheme);
 $("currencySelect").onchange=e=>setCurrency(e.target.value);
 $("currencySettings").onchange=e=>setCurrency(e.target.value);
 $("logout").onclick=async()=>{
