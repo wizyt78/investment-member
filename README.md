@@ -39,3 +39,7 @@ The Home member carousel uses eight files in `profiles/`. Replace each JPG with 
 - `mariam-khalil.jpg`
 
 No HTML editing is required when replacing a photo.
+
+
+## Session persistence
+Normal page refreshes keep the saved member session. The token is only cleared after a confirmed authentication failure; transient server/network errors do not erase it. Log out still clears the session.
