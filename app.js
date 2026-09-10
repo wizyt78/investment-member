@@ -143,6 +143,7 @@ function toggleLang(){lang=lang==="ar"?"en":"ar";localStorage.setItem("ip_lang",
 function applyTheme(){document.documentElement.classList.toggle("dark",theme==="dark");localStorage.setItem("ip_theme",theme)}
 function toggleTheme(){theme=theme==="dark"?"light":"dark";applyTheme()}
 applyTheme();
+window.addEventListener("pageshow",()=>{if(token&&!data)load().catch(()=>{});});
 
 async function api(path,opt={}){
  const headers={"content-type":"application/json",...(token?{authorization:"Bearer "+token}:{})};
@@ -224,7 +225,11 @@ function render(){
  $("pUser").value=data.user.username||"";$("pName").value=data.user.full_name||"";$("pEmail").value=data.user.email||"";
  setAllAvatars();
 }
-async function load(){const d=await api("/api/me");data=d;$("auth").hidden=true;$("dash").hidden=false;render()}
+async function load(){
+  const d=await api("/api/me");
+  if(!d || !d.user)throw Error("Invalid session");
+  data=d;$("auth").hidden=true;$("dash").hidden=false;render();
+}
 
 $("lang").onclick=toggleLang;$("lang2").onclick=toggleLang;$("langSettings").onclick=toggleLang;
 $("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;
@@ -370,4 +375,13 @@ $("sendBankSearch")?.addEventListener("input",()=>fillBankOptions($("sendCountry
 refreshBankFields();
 applyLang();
 loadFxRates().then(()=>{if(data)render()});
-(async()=>{if(token){try{await load()}catch{localStorage.removeItem("ip_token");token=""}}})();
+(async()=>{
+  if(!token)return;
+  try{
+    await load();
+  }catch(e){
+    const msg=String(e?.message||"").toLowerCase();
+    const authFailure=msg.includes("unauthorized")||msg.includes("invalid session")||msg.includes("session expired")||msg.includes("not authenticated")||msg.includes("authentication");
+    if(authFailure){localStorage.removeItem("ip_token");token="";}
+  }
+})();
