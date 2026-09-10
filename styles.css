@@ -186,3 +186,5 @@ textarea{min-height:120px;resize:vertical}
 .profile-track{direction:ltr}
 html[dir="rtl"] .profile-slide{direction:rtl}
 html[dir="rtl"] .profile-arrow{direction:ltr}
+
+html.session-boot #auth{display:none!important}
