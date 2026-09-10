@@ -1,13 +1,13 @@
 const API=window.API_BASE_URL;
 let token=localStorage.getItem("ip_token")||"",data=null;
 let lang=localStorage.getItem("ip_lang")||"ar";
-let theme=(localStorage.getItem("ip_theme_default_v2")==="1"?localStorage.getItem("ip_theme"):"dark")||"dark";
-if(localStorage.getItem("ip_theme_default_v2")!=="1"){localStorage.setItem("ip_theme","dark");localStorage.setItem("ip_theme_default_v2","1");}
+let theme=localStorage.getItem("ip_theme")||"dark";
 let balanceHidden=false;
 let currency=localStorage.getItem("ip_currency")||"KWD";
 let fxRates={KWD:1,USD:null,EUR:null};
 
 const $=id=>document.getElementById(id);
+if(token){document.documentElement.classList.add("session-boot");setTimeout(()=>{const a=$("auth");if(a)a.style.display="none";},0)}
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const toast=m=>{const x=$("toast");x.textContent=m;x.style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>x.style.display="none",3200)};
 const fmt=n=>{
@@ -409,9 +409,10 @@ loadFxRates().then(()=>{if(data)render()});
   if(!token)return;
   try{
     await load();
+    document.documentElement.classList.remove("session-boot");
   }catch(e){
     const msg=String(e?.message||"").toLowerCase();
-    const authFailure=msg.includes("unauthorized")||msg.includes("invalid session")||msg.includes("session expired")||msg.includes("not authenticated")||msg.includes("authentication");
-    if(authFailure){localStorage.removeItem("ip_token");token="";}
+    const authFailure=msg.includes("unauthorized")||msg.includes("invalid session")||msg.includes("session expired")||msg.includes("not authenticated")||msg.includes("authentication required")||msg.includes("account suspended");
+    if(authFailure){localStorage.removeItem("ip_token");token="";document.documentElement.classList.remove("session-boot");if($("auth"))$("auth").style.display="";if($("dash"))$("dash").hidden=true;}
   }
 })();
