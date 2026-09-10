@@ -1,7 +1,8 @@
 const API=window.API_BASE_URL;
 let token=localStorage.getItem("ip_token")||"",data=null;
 let lang=localStorage.getItem("ip_lang")||"ar";
-let theme=localStorage.getItem("ip_theme")||"dark";
+let theme=(localStorage.getItem("ip_theme_default_v2")==="1"?localStorage.getItem("ip_theme"):"dark")||"dark";
+if(localStorage.getItem("ip_theme_default_v2")!=="1"){localStorage.setItem("ip_theme","dark");localStorage.setItem("ip_theme_default_v2","1");}
 let balanceHidden=false;
 let currency=localStorage.getItem("ip_currency")||"KWD";
 let fxRates={KWD:1,USD:null,EUR:null};
