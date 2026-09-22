@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050505">
 <meta name="color-scheme" content="dark light">
-<script>(function(){try{var t=localStorage.getItem("ip_theme_v2")||"dark";if(t==="dark")document.documentElement.classList.add("dark");}catch(e){document.documentElement.classList.add("dark");}})();</script>
+<script>(function(){try{var token=localStorage.getItem("ip_token");var t=localStorage.getItem("ip_theme_v2")||"dark";if(token&&t==="dark")document.documentElement.classList.add("dark");}catch(e){document.documentElement.classList.add("dark");}})();</script>
 <title>Tesla Investment</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,7 +71,6 @@
         <img class="full-brand-logo" src="assets/tesla-investment-logo.png" alt="Tesla Investment">
       </a>
       <div class="app-actions">
-        <button id="theme" class="icon-btn" type="button" aria-label="Theme" data-i18n-aria="themeMode">◐</button>
         <label class="currency-compact" aria-label="Currency" data-i18n-aria="currency">
           <span data-i18n="currency">Currency</span>
           <select id="currencySelect" aria-label="Currency" data-i18n-aria="currency">
@@ -80,7 +79,7 @@
             <option value="EUR">EUR</option>
           </select>
         </label>
-        <button id="logout" class="outline-btn" type="button" data-i18n="logout">Log out</button>
+        <button id="themeTop" class="theme-switch top-theme-switch" type="button" aria-label="Theme" data-i18n-aria="themeMode"><span>☼</span><i></i><span>☾</span></button>
         <button id="profileTop" class="user-chip" type="button" data-view-link="settings">
           <span id="avatarTop" class="avatar">U</span><span id="topName">Member</span><b>⌄</b>
         </button>
@@ -99,7 +98,6 @@
         <button data-view="funding" class="nav-item"><span>＋</span><b data-i18n="deposit">Deposit</b></button>
         <button data-view="send" class="nav-item"><span>⇄</span><b data-i18n="sendMoney">Send Money</b></button>
         <button data-view="withdraw" class="nav-item"><span>↗</span><b data-i18n="withdraw">Withdraw</b></button>
-        <button id="themeSidebar" class="nav-item theme-nav-item" type="button" data-i18n-aria="themeMode"><span>◐</span><b data-i18n="theme">Theme</b><i id="themeSidebarState"></i></button>
         <button data-view="settings" class="nav-item"><span>⚙</span><b data-i18n="settings">Settings</b></button>
       </nav>
       <div class="sidebar-footer">
@@ -329,6 +327,7 @@
             <div class="panel-head"><div><span class="eyebrow" data-i18n="preferences">PREFERENCES</span><h2 data-i18n="appearance">Appearance</h2></div></div>
             <div class="preference-row"><div><b data-i18n="themeMode">Theme</b><small data-i18n="themeModeSub">Choose light or dark mode.</small></div><button id="themeSettings" class="theme-switch" type="button"><span>☼</span><i></i><span>☾</span></button></div>
             <div class="preference-row"><div><b data-i18n="currency">Currency</b><small data-i18n="currencySub">Choose the display currency for your account.</small></div><select id="currencySettings" class="small-select" aria-label="Currency" data-i18n-aria="currency"><option value="KWD">KWD</option><option value="USD">USD</option><option value="EUR">EUR</option></select></div>
+            <div class="preference-row account-action-row"><div><b data-i18n="logout">Log out</b><small>Sign out of your member account.</small></div><button id="logoutSettings" class="outline-btn" type="button" data-i18n="logout">Log out</button></div>
           </div>
         </div>
       </section>
