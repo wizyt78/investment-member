@@ -306,3 +306,8 @@ body{letter-spacing:-.01em}
 .chat-fund-btn{background:linear-gradient(135deg,#e82127,#b9141a)}.institution-chips span:hover{border-color:#e8212755}.mobile-nav button.active{color:var(--green)}
 @media(max-width:800px){.brand-lockup img{width:150px;height:auto;max-height:46px}}
 @media(max-width:470px){.brand-lockup img{width:135px;max-height:42px}.auth-top .brand-lockup img{width:145px}}
+
+/* TESLA PROFILE PHOTO FIX — keep uploaded photos inside every circular avatar. */
+.avatar{overflow:hidden;border-radius:50%;background-repeat:no-repeat;background-position:center center;background-size:cover;isolation:isolate}
+.profile-avatar-wrap .avatar-xl{width:104px;height:104px;min-width:104px;min-height:104px;border-radius:50%;object-fit:cover;display:grid;place-items:center;background-repeat:no-repeat;background-position:center center;background-size:cover}
+.profile-avatar-wrap{overflow:visible}
