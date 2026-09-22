@@ -131,16 +131,21 @@ function applyLang(){
  if(data)render();
 }
 function applyTheme(){
- document.documentElement.classList.toggle("dark",theme==="dark");
- localStorage.setItem("ip_theme_v2",theme);
+ const effectiveTheme=token?theme:"light";
+ document.documentElement.classList.toggle("dark",effectiveTheme==="dark");
+ if(token)localStorage.setItem("ip_theme_v2",theme);
  const state=$("themeSidebarState");
- if(state)state.textContent=T[lang][theme==="dark"?"dark":"light"];
+ if(state)state.textContent=T[lang][effectiveTheme==="dark"?"dark":"light"];
  const top=$("theme");
  if(top)top.setAttribute("aria-label",T[lang].themeMode);
  const side=$("themeSidebar");
  if(side)side.setAttribute("aria-label",T[lang].themeMode);
+ const settings=$("themeSettings");
+ if(settings)settings.setAttribute("aria-label",T[lang].themeMode);
+ const topTheme=$("themeTop");
+ if(topTheme)topTheme.setAttribute("aria-label",T[lang].themeMode);
 }
-function toggleTheme(){theme=theme==="dark"?"light":"dark";applyTheme()}
+function toggleTheme(){if(!token)return;theme=theme==="dark"?"light":"dark";applyTheme()}
 applyTheme();
 window.addEventListener("pageshow",()=>{if(token&&!data)load().catch(()=>{});});
 
@@ -235,14 +240,14 @@ function render(){
 async function load(){
   const d=await api("/api/me");
   if(!d || !d.user)throw Error("Invalid session");
-  data=d;pendingAvatar="";$("auth").hidden=true;$("dash").hidden=false;render();if($("saveAvatar"))$("saveAvatar").disabled=true;
+  data=d;pendingAvatar="";$("auth").hidden=true;$("dash").hidden=false;applyTheme();render();if($("saveAvatar"))$("saveAvatar").disabled=true;
 }
 
-$("theme").onclick=toggleTheme;$("themeSettings").onclick=toggleTheme;
-$("themeSidebar").onclick=toggleTheme;
+$("themeSettings")?.addEventListener("click",toggleTheme);
+$("themeTop")?.addEventListener("click",toggleTheme);
 $("currencySelect").onchange=e=>setCurrency(e.target.value);
 $("currencySettings").onchange=e=>setCurrency(e.target.value);
-$("logout").onclick=async()=>{
+const logoutUser=async()=>{
  try{
    if(token) await api("/api/auth/logout",{method:"POST"});
  }catch{}
@@ -251,9 +256,11 @@ $("logout").onclick=async()=>{
  $("loginForm").hidden=false;$("signupForm").hidden=true;
  $("authTitle").textContent=T[lang].welcomeBack;$("authSub").textContent=T[lang].loginSub;
  $("loginPass").value="";
+ applyTheme();
  show("overview");
  toast(T[lang].logoutSuccess);
 };
+$("logoutSettings")?.addEventListener("click",logoutUser);
 $("hideBalance").onclick=()=>{balanceHidden=!balanceHidden;render()};
 $("mobileMenu").onclick=()=>$("sidebar").classList.toggle("open");
 $("profileTop").onclick=()=>show("settings");
