@@ -163,8 +163,16 @@ function avatarKey(id){return "ip_avatar_"+String(id||"member")}
 function initials(name){return String(name||"M").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"M"}
 function setAvatar(el,src,name){
  if(!el)return;
- if(src){el.style.backgroundImage=`url("${src.replace(/"/g,"%22")}")`;el.textContent=""}
- else{el.style.backgroundImage="";el.textContent=initials(name)}
+ el.style.backgroundSize="cover";
+ el.style.backgroundPosition="center center";
+ el.style.backgroundRepeat="no-repeat";
+ if(src){
+   el.style.backgroundImage=`url('${String(src).replace(/'/g,"%27")}')`;
+   el.textContent="";
+ }else{
+   el.style.backgroundImage="none";
+   el.textContent=initials(name);
+ }
 }
 function getAvatar(){
  try{return data?.user?.avatar_url||localStorage.getItem(avatarKey(data?.user?.id))||""}catch{return data?.user?.avatar_url||""}
@@ -320,11 +328,16 @@ $("avatarFile").onchange=e=>{
  r.onload=ev=>{
   const img=new Image();
   img.onload=()=>{
-   const c=document.createElement("canvas"),max=420,scale=Math.min(1,max/Math.max(img.width,img.height));
-   c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));
-   c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-   pendingAvatar=c.toDataURL("image/jpeg",.78);
+   const size=420;
+   const c=document.createElement("canvas");
+   c.width=size;c.height=size;
+   const ctx=c.getContext("2d");
+   const side=Math.min(img.width,img.height);
+   const sx=(img.width-side)/2,sy=(img.height-side)/2;
+   ctx.drawImage(img,sx,sy,side,side,0,0,size,size);
+   pendingAvatar=c.toDataURL("image/jpeg",.84);
    setAvatar($("profileAvatar"),pendingAvatar,data.user.full_name||"Member");
+   ["avatarTop","avatarSide","mobileAvatar"].forEach(id=>setAvatar($(id),pendingAvatar,data.user.full_name||"Member"));
    $("saveAvatar").disabled=false;
   };
   img.src=ev.target.result;
